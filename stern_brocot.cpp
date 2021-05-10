@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// å„²å­˜åˆ†å­èˆ‡åˆ†æ¯çš„class
+// Àx¦s¤À¤l»P¤À¥Àªºclass
 class Number {
 private:
     int numeratpor;
@@ -14,18 +14,18 @@ public:
         this->denominator = denominator;
     }
 
-    // å–å¾—åˆ†å­é™¤åˆ†æ¯è¨ˆç®—å‡ºä¾†çš„å€¼
+    // ¨ú±o¤À¤l°£¤À¥À­pºâ¥X¨Óªº­È
     double getValue() {
         return (double) numeratpor / denominator;
     }
 
-    // ç”¨å¦ä¸€å€‹ç‰©ä»¶ï¼Œç›´æŽ¥è¤‡å¯«åˆ†å­åˆ†æ¯çš„å€¼
+    // ¥Î¥t¤@­Óª«¥ó¡Aª½±µ½Æ¼g¤À¤l¤À¥Àªº­È
     void setValue(Number *num) {
         this->numeratpor = num->numeratpor;
         this->denominator = num->denominator;
     }
 
-    // ç”¨å¦ä¸€å€‹ç‰©ä»¶ï¼ŒæŠŠåˆ†å­åˆ†æ¯çš„å€¼ç›¸åŠ å¾Œå„²å­˜
+    // ¥Î¥t¤@­Óª«¥ó¡A§â¤À¤l¤À¥Àªº­È¬Û¥[«áÀx¦s
     void addValue(Number *num) {
         this->numeratpor += num->numeratpor;
         this->denominator += num->denominator;
@@ -56,22 +56,22 @@ public:
 
 
 int main() {
-    // è¨­å®šç›®æ¨™çš„åˆ†å­åˆ†æ¯è®Šæ•¸
+    // ³]©w¥Ø¼Ðªº¤À¤l¤À¥ÀÅÜ¼Æ
     int target_numerator, target_denominator;
 
     while (!cin.eof()) {
-        // è¨‚å®šå·¦ã€ä¸­ã€å³ä¸‰å€‹ç‰©ä»¶ (é¡Œç›®åªéœ€è¦ç”¨ä¸‰å€‹ç‰©ä»¶å³å¯)
+        // ­q©w¥ª¡B¤¤¡B¥k¤T­Óª«¥ó (ÃD¥Ø¥u»Ý­n¥Î¤T­Óª«¥ó§Y¥i)
         Number *left = new Number(0, 1);
         Number *mid = new Number(1, 1);
         Number *right = new Number(1, 0);
 
-        // ä¸€æ¬¡è®€å–å…©å€‹å€¼ï¼Œåˆ†åˆ¥ç‚ºåˆ†å­å’Œåˆ†æ¯
+        // ¤@¦¸Åª¨ú¨â­Ó­È¡A¤À§O¬°¤À¤l©M¤À¥À
         cin >> target_numerator;
         cin >> target_denominator;
 
-        // è¨­å®šç›®æ¨™çš„ç‰©ä»¶
+        // ³]©w¥Ø¼Ðªºª«¥ó
         Number *target = new Number(target_numerator, target_denominator);
-        // è‹¥targetå’Œmidçš„ç‰©ä»¶å€¼ä¸ç›¸åŒå‰‡ç¹¼çºŒè¿´åœˆ
+        // ­Ytarget©Mmidªºª«¥ó­È¤£¬Û¦P«hÄ~Äò°j°é
         while (*mid != *target) {
             if (mid->getValue() < target->getValue()) {
                 left->setValue(mid);
