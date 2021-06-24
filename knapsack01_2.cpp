@@ -5,17 +5,17 @@
 
 using namespace std;
 
-tuple<int, vector<int>>
-dfs(vector<vector<float>> *items, int index, double *maxPrice, double curPrice, const int *totalSize, int weight) {
+tuple<double,vector<int>> dfs(vector<vector<float>> *items, int index, double *maxPrice, double curPrice, const int *totalSize, int weight) {
 
     if (index == items->size()) {
         *maxPrice = max(*maxPrice, curPrice);
+//        return pair<int,vector<int>>(curPrice,vector<int>());
         return {curPrice, vector<int>()};
     }
 
-    int itemID = (*items)[index][0];
-    int itemWeight = (*items)[index][1];
-    int itemPrice = (*items)[index][2];
+    int itemID = (int) (*items)[index][0];
+    int itemWeight = (int)(*items)[index][1];
+    int itemPrice = (int)(*items)[index][2];
     if (weight + itemWeight > *totalSize) {
         *maxPrice = max(*maxPrice, curPrice);
 
@@ -24,7 +24,7 @@ dfs(vector<vector<float>> *items, int index, double *maxPrice, double curPrice, 
     }
 
 //    // Take current item
-    int takeWeight, ntWeight;
+    double takeWeight, ntWeight;
     vector<int> takeSqu, ntSqu;
     tie(takeWeight, takeSqu) = dfs(items, index + 1, maxPrice, curPrice + itemPrice, totalSize, weight + itemWeight);
 
@@ -33,10 +33,13 @@ dfs(vector<vector<float>> *items, int index, double *maxPrice, double curPrice, 
 
     if (takeWeight > ntWeight) {
         takeSqu.push_back(itemID);
-        return {takeWeight, takeSqu};
+//        return pair<int,vector<int>>(takeWeight, takeSqu);
+//        return {takeWeight, takeSqu};
+        return make_tuple(takeWeight, takeSqu);
     } else {
-
-        return {ntWeight, ntSqu};
+//        return pair<int,vector<int>>(ntWeight, ntSqu);
+//        return {ntWeight, ntSqu};
+        return make_tuple(ntWeight, ntSqu);
     }
 
 }
@@ -62,7 +65,7 @@ int main() {
          });
 
     double maxPrice = INT32_MIN;
-    int weight;
+    double weight;
     vector<int> squ;
     tie(weight, squ) = dfs(&items, 0, &maxPrice, 0, &size, 0);
 
