@@ -76,6 +76,8 @@ int main() {
     // priority, index, curPrice, weight
     priorityQueue.push_back(Pack(0., 0, 0., 0, vector<int>()));
 
+    Pack globalOptimize(0.,0,0.,0.,vector<int>());
+
     while (priorityQueue.size()) {
         Pack pack = priorityQueue[0];
         vector<int> ids = pack.id;
@@ -85,15 +87,19 @@ int main() {
         int p = i[2];
         int curID = i[0];
 
-        if (index == items.size() - 1) {
-            break;
-        }
-
         pop_heap(priorityQueue.begin(), priorityQueue.end());
         priorityQueue.pop_back();
 
+        if (index == items.size() - 1) {
+            if(pack.price >= globalOptimize.price){
+                globalOptimize = pack;
+            }
+            break;
+        }
+
+
         if (pack.weight + w <= size) {
-            float takePredict = predictPrice(&items, index + 1, pack.price, &size, pack.weight);
+            float takePredict = predictPrice(&items, index + 1, pack.price+p, &size, pack.weight);
             vector<int> takeID = ids;
             takeID.push_back(curID);
             priorityQueue.push_back(Pack(takePredict, pack.index + 1, pack.price + p, pack.weight + w, takeID));
@@ -106,7 +112,7 @@ int main() {
     }
 
 
-    Pack pack = priorityQueue[0];
+    Pack pack = globalOptimize;
     vector<int> ids = pack.id;
 
     for (int i = 0; i < ids.size()-1; ++i) {
@@ -114,29 +120,5 @@ int main() {
     }
     cout << ids[ids.size()-1] << endl;
 
-    cout << pack.price;
-    
-//    for(vector<float> v: items){
-//        for(float f: v){
-//            cout << f << " ";
-//        }
-//        cout << endl;
-//    }
-
-
-//    double maxPrice = INT32_MIN;
-//    double weight;
-//    vector<int> squ;
-//    Pack p;
-//    p = dfs(&items, 0, &maxPrice, 0, &size, 0);
-//    weight = p.price;
-//    squ = p.id;
-//
-//    reverse(squ.begin(), squ.end());
-//    for (int i = 0; i < squ.size() - 1; ++i) {
-//        cout << squ[i] << " ";
-//    }
-//    cout << squ[squ.size() - 1] << endl;
-//
-//    cout << maxPrice << endl;
+    cout << pack.price << endl;
 }
