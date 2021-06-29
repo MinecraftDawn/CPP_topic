@@ -90,11 +90,15 @@ int main() {
         pop_heap(priorityQueue.begin(), priorityQueue.end());
         priorityQueue.pop_back();
 
+        if(pack.priority < globalOptimize.price){
+            continue;
+        }
+
         if (index == items.size() - 1) {
             if(pack.price >= globalOptimize.price){
                 globalOptimize = pack;
             }
-            break;
+            continue;
         }
 
 
