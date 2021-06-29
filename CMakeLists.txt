@@ -3,4 +3,4 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled knapsack01_3.cpp)
+add_executable(untitled minLenOfSubArray.cpp)
